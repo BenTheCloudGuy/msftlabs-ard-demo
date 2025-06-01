@@ -1,0 +1,18 @@
+{
+  "name": "msftlabs-ard-demo",
+  "version": "1.0.0",
+  "description": "Arduino to Azure SignalR Node.js WebApp Demo",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "@azure/signalr": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

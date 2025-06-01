@@ -4,10 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Device Status</title>
+  <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@7.0.5/dist/browser/signalr.min.js"></script>
 </head>
 <body>
   <h1>Device Status</h1>
-  <p><strong>IP Address:</strong> <%= deviceData.ip %></p>
-  <p><strong>Last Update:</strong> <%= deviceData.timestamp %></p>
+  <p><strong>IP Address:</strong> <span id="ip"><%= deviceData.ip %></span></p>
+  <p><strong>Last Update:</strong> <span id="timestamp"><%= deviceData.timestamp %></span></p>
+  <script>
+    async function startSignalR() {
+      // Get negotiate info from server
+      const res = await fetch('/negotiate');
+      const { url, accessToken } = await res.json();
+
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl(url, { accessTokenFactory: () => accessToken })
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+      connection.on("update", (data) => {
+        document.getElementById('ip').textContent = data.ip;
+        document.getElementById('timestamp').textContent = data.timestamp;
+      });
+
+      await connection.start();
+    }
+    startSignalR();
+  </script>
 </body>
 </html>

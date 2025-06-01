@@ -3,7 +3,7 @@
 
 const char* ssid = "TheMitchellFamily";
 const char* password = "TMFAESSECURITY";
-const char* signalrUrl = "https://msftlabs-ard-sigr.service.signalr.net;AccessKey=FymRIatXTogEBH5Fpnh9YF4WDUe5h2fY9OUbxOIyLvIMxvaFXXPvJQQJ99BFAC1i4TkXJ3w3AAAAASRSZPCo;Version=1.0;";
+const char* webAppUrl = "https://msftlabs-ard-demo-h7hxa4hef6fnh9da.centralus-01.azurewebsites.net/update";
 
 void setup() {
   Serial.begin(115200);
@@ -18,7 +18,7 @@ void setup() {
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
-    http.begin(signalrUrl);
+    http.begin(webAppUrl);
     http.addHeader("Content-Type", "application/json");
 
     String payload = "{\"ip\":\"" + WiFi.localIP().toString() + "\",\"timestamp\":\"" + String(millis()) + "\"}";
