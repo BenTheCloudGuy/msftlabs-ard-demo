@@ -8,7 +8,7 @@ const cors = require('cors');
 app.use(cors());
 
 // SignalR integration
-const { AzureSignalR } = require('@azure/signalr');
+const { AzureSignalR } = require('@azure/azure-signalr');
 // Load connection string from environment variable (Azure App Service convention)
 const signalRConnectionString = process.env.ConnectionStrings__signalRConnectionString;
 if (!signalRConnectionString) {
